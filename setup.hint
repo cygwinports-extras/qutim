@@ -1,0 +1,4 @@
+category: Net
+requires: libgcc1 libidn11 libQtCore4 libQtGui4 libQtNetwork4 libQtScript4 libQtSql4 libQtWebKit4 libQtXml4 libstdc++6 libX11_6 libXss1 zlib0
+sdesc: "Multiprotocol IM client"
+ldesc: "Free open-source multiprotocol instant messenger"

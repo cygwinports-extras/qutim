@@ -1,8 +1,13 @@
 inherit qt4-cmake qt4-qmake
 
-DESCRIPTION="Multiprotocol IM client"
+NAME="qutim"
+VERSION=0.2.0
+RELEASE=1
+CATEGORY="Net"
+SUMMARY="Multiprotocol IM client"
+DESCRIPTION="Free open-source multiprotocol instant messenger"
 HOMEPAGE="http://www.qutim.org/"
-SRC_URI="http://www.qutim.org/uploads/src/${P}.tar.bz2"
+SRC_URI="http://www.qutim.org/uploads/src/${NAME}-${VERSION}.tar.bz2"
 PATCH_URI="0.2.0-dllext.patch"
 
 src_compile() {

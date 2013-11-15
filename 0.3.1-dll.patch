@@ -1,0 +1,51 @@
+Plugins are loaded in alphabetical order, but several plugins depend on
+simplecontactlist which are loaded first.  (Other plugins depend on adiumchat,
+oscar, and vkontakte, but they already precede their reverse deps.)
+
+--- origsrc/qutim-0.3.1/core/cmake/QutIMMacros.cmake	2012-04-13 11:51:50.000000000 -0500
++++ src/qutim-0.3.1/core/cmake/QutIMMacros.cmake	2013-11-14 03:32:15.096141800 -0600
+@@ -382,12 +382,8 @@ Q_IMPORT_PLUGIN(${plugin_name})
+ 
+ 	#if( QUTIM_${plugin_name}_STATIC STREQUAL "SHARED" ) #what the fucking going on?
+ 		install( TARGETS ${plugin_name}
+-			RUNTIME DESTINATION bin/plugins
++			LIBRARY RUNTIME DESTINATION lib${LIB_SUFFIX}/qutim/plugins
+ 				COMPONENT ${plugin_name}
+-			LIBRARY DESTINATION lib${LIB_SUFFIX}/qutim/plugins
+-				COMPONENT ${plugin_name}
+-			ARCHIVE DESTINATION lib${LIB_SUFFIX}
+-				COMPONENT "${plugin_name}Devel"
+ 		)
+ 	#endif( QUTIM_${plugin_name}_STATIC STREQUAL "SHARED" )
+ 
+--- origsrc/qutim-0.3.1/core/libqutim/CMakeLists.txt	2012-04-13 11:51:50.000000000 -0500
++++ src/qutim-0.3.1/core/libqutim/CMakeLists.txt	2013-11-14 03:04:56.921443600 -0600
+@@ -122,7 +122,7 @@ ENDIF()
+ ADD_LIBRARY(libqutim ${LIBQUTIM_TYPE} ${SRC} ${MOC_SRC} ${HDR} ${SRC_MM})
+ 
+ set_target_properties(libqutim PROPERTIES
+-	PREFIX ""
++	OUTPUT_NAME qutim
+ 	VERSION ${CMAKE_QUTIM_VERSION_STRING}
+ 	SOVERSION ${CMAKE_QUTIM_VERSION_MAJOR}
+ 	DEFINE_SYMBOL LIBQUTIM_LIBRARY
+--- origsrc/qutim-0.3.1/core/src/corelayers/simplecontactlist/CMakeLists.txt	2012-04-13 11:51:50.000000000 -0500
++++ src/qutim-0.3.1/core/src/corelayers/simplecontactlist/CMakeLists.txt	2013-11-14 17:06:42.733436200 -0600
+@@ -9,6 +9,7 @@ qutim_add_plugin(simplecontactlist
+ 	DESCRIPTION "Default qutIM contact list implementation. Just simple"
+ 	COMPILE_FLAGS "-DSIMPLECONTACTLIST_LIBRARY"
+ )
++set_target_properties(simplecontactlist PROPERTIES OUTPUT_NAME aaasimplecontactlist)
+ 
+ qutim_add_plugin(simplecontactdelegate
+ 	SUBPLUGIN
+--- origsrc/qutim-0.3.1/plugins/qmlchat/CMakeLists.txt	2012-04-13 11:51:50.000000000 -0500
++++ src/qutim-0.3.1/plugins/qmlchat/CMakeLists.txt	2013-11-14 02:53:02.804598400 -0600
+@@ -15,6 +15,7 @@ qutim_add_plugin(qmlchat
+ 	SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}
+ 	DESCRIPTION "Modern chat view based on power of QtQuick"
+ 	DEPENDS adiumchat
++	LINK_LIBRARIES adiumchat
+ 	QT_LIBRARIES DECLARATIVE OPENGL
+ )
+ 

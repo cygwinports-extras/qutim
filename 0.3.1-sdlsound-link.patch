@@ -1,0 +1,19 @@
+Fix undefined references to libSDL symbols
+
+--- origsrc/qutim-0.3.1/plugins/sdlsound/CMakeLists.txt	2012-04-13 11:51:50.000000000 -0500
++++ src/qutim-0.3.1/plugins/sdlsound/CMakeLists.txt	2013-11-14 02:34:04.470489400 -0600
+@@ -1,3 +1,4 @@
++find_package( SDL )
+ find_package( SDL_mixer )
+ 
+ if( NOT SDLMIXER_FOUND )
+@@ -8,7 +9,7 @@ endif()
+ qutim_add_plugin( sdlsound
+ 	DISPLAY_NAME "SDL sound engine"
+ 	DESCRIPTION "Sound engine based on Simple DirectMedia Layer"
+-	LINK_LIBRARIES ${SDLMIXER_LIBRARY}
+-	INCLUDE_DIRS ${SDLMIXER_INCLUDE_DIR}
++	LINK_LIBRARIES ${SDLMIXER_LIBRARY} ${SDL_LIBRARY}
++	INCLUDE_DIRS ${SDLMIXER_INCLUDE_DIR} ${SDL_INCLUDE_DIR}
+ )
+ 

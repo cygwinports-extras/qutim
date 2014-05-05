@@ -1,0 +1,20 @@
+--- origsrc/qutim-0.3.2/plugins/screenshoter/src/shoter.cpp	2013-12-16 11:57:10.000000000 -0600
++++ src/qutim-0.3.2/plugins/screenshoter/src/shoter.cpp	2014-05-05 13:45:48.730263000 -0500
+@@ -33,7 +33,7 @@
+ #include <QDesktopWidget>
+ #if defined Q_OS_WIN
+ #include <windows.h>
+-#elif defined Q_OS_LINUX
++#elif defined Q_WS_X11
+ #include <X11/Xlib.h>
+ #else
+ #error Unsupported OS
+@@ -204,7 +204,7 @@ void Shoter::reShot()
+ #if defined Q_OS_WIN
+ 		HWND winf = GetForegroundWindow();
+ 		shot(winf);
+-#elif defined Q_OS_LINUX
++#elif defined Q_WS_X11
+ 		Window winf;
+ 		Display *dpy;
+ 		dpy = XOpenDisplay(0);

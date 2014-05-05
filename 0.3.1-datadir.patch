@@ -12,11 +12,11 @@
 --- origsrc/qutim-0.3.1/core/cmake/QutIMMacros.cmake	2012-04-13 11:51:50.000000000 -0500
 +++ src/qutim-0.3.1/core/cmake/QutIMMacros.cmake	2013-11-14 03:32:15.096141800 -0600
 @@ -94,7 +94,7 @@ IF(WIN32)
- ELSEIF(APPLE)
- 	SET(QUTIM_SHARE_DIR_DEF ${QUTIM_BUNDLE_NAME}/Contents/Resources/share)
+ 	set(QUTIM_SHARE_DIR_DEF ${QUTIM_BUNDLE_NAME}/Contents/Resources/share)
+ 	set(SHARE_DIR_DEF ${QUTIM_SHARE_DIR_DEF})
  ELSE()
--	SET(QUTIM_SHARE_DIR_DEF share/apps/qutim)
-+	SET(QUTIM_SHARE_DIR_DEF share/qutim)
+-	set(QUTIM_SHARE_DIR_DEF share/apps/qutim)
++	set(QUTIM_SHARE_DIR_DEF share/qutim)
+ 	set(SHARE_DIR_DEF share)
  ENDIF()
- #SET(QUTIM_SHARE_DIR "${QUTIM_SHARE_DIR_DEF}" CACHE DESCRIPTION "qutIM share dir")
- set(QUTIM_SHARE_DIR "${QUTIM_SHARE_DIR_DEF}")
+ set(QUTIM_SHARE_DIR "${QUTIM_SHARE_DIR_DEF}" CACHE STRING "QutIM share dir")

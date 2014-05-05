@@ -1,17 +1,18 @@
 inherit qt4-cmake
 
 NAME="qutim"
-VERSION=0.3.1
+VERSION=0.3.2
 RELEASE=1
 CATEGORY="Net"
 SUMMARY="Multiprotocol IM client"
 DESCRIPTION="Free open-source multiprotocol instant messenger"
 HOMEPAGE="http://www.qutim.org/"
-SRC_URI="http://www.qutim.org/dwnl/40/${NAME}-${VERSION}.tar.bz2"
+SRC_URI="http://www.qutim.org/dwnl/68/${NAME}-${VERSION}.tar.xz"
 PATCH_URI="
 	0.3.1-datadir.patch
 	0.3.1-dll.patch
 	0.3.1-sdlsound-link.patch
+	0.3.2-screenshoter-x11.patch
 "
 
 PKG_NAMES="${NAME} ${NAME}-devel ${NAME}-doc ${NAME}-kde ${NAME}-quetzal"
@@ -32,7 +33,9 @@ src_compile() {
 	cd ${B}
 	lndirs
 	# ASTRAL: incompatible with current TelepathyQt4
+	# OFFTHERECORD: incompatible with libotr-4.0
 	qt4_cmake_compile \
 		-DASTRAL=OFF -DSYSTEM_JREEN=ON \
+		-DOFFTHERECORD=OFF \
 		-D__KDE_HAVE_GCC_VISIBILITY=OFF
 }

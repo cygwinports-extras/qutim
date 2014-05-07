@@ -1,0 +1,19 @@
+--- origsrc/qutim-0.3.2/plugins/plugman/src/plugmanarchive.cpp	2013-12-16 11:57:10.000000000 -0600
++++ src/qutim-0.3.2/plugins/plugman/src/plugmanarchive.cpp	2014-05-07 18:48:48.466662900 -0500
+@@ -14,7 +14,7 @@ int archive_read_open_file(struct archiv
+ int archive_read_next_header(struct archive *,
+                                            struct archive_entry **);
+ const wchar_t * archive_entry_pathname_w(struct archive_entry *);
+-int archive_read_free(struct archive *);
++int archive_read_finish(struct archive *);
+ int archive_read_close(struct archive *);
+ const char *archive_error_string(struct archive *);
+ }
+@@ -89,6 +89,6 @@ bool PlugmanArchive::extract(const QStri
+             plugman_copy_data(arc, dir, fileName);
+     }
+     archive_read_close(arc);
+-    archive_read_free(arc);
++    archive_read_finish(arc);
+     return true;
+ }

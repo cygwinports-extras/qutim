@@ -14,6 +14,9 @@ PATCH_URI="
 	0.3.1-sdlsound-link.patch
 	0.3.2-screenshoter-x11.patch
 "
+if defined ARCH_i686; then
+PATCH_URI+=" 0.3.2-libarchive-compat.patch"
+fi
 
 PKG_NAMES="${NAME} ${NAME}-devel ${NAME}-doc ${NAME}-kde ${NAME}-quetzal"
 qutim_CONTENTS="--exclude=html --exclude=qch --exclude=cygkdeintegration.dll
